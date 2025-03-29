@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Injector</title>
+  <link rel="stylesheet" type="text/css" href="promptInjector.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="container">
+        <!-- <div class="form-check">
+            <input id="themeToggle" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                Dark Mode
+            </label>
+          </div> -->
+          <div class="form-check form-switch">
+            <input id="themeToggle" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Dark Mode</label>
+          </div>
+        <div class="box">
+            <label for="baseText">Initial Prompt</label>
+            <input type="text" id="baseText" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Enter starting text">
+            <!-- <label>
+                <input type="checkbox" id="themeToggle"> Dark Mode
+              </label> -->
+          </div>
+            <div class="btn-group radio-buttons" role="group" aria-label="...">
+                <input type="radio" name="mode" id="btnradio1" value="chat" class="btn-check" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio1">Chat</label>
+                <input type="radio" name="mode" id="btnradio2" value="image" class="btn-check" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">Image</label>
+                <input type="radio" name="mode" id="btnradio3" value="none" class="btn-check" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio3">None</label>
+            
+            </div>
+            
+        <div id="chat-mode" style="display: none;">
+            <!-- Boxes with Dropdown Menus -->
+            <div class="box">
+            <label for="context">Context</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="context">
+                <option selected value="">Choose here</option>
+                <option value="casual chat">Casual Chat</option>
+                <option value="business meeting">Business Meeting</option>
+                <option value="academic discussion">Academic Discussion</option>
+                <option value="technical support">Technical Support</option>
+            </select>
+            </div>
+
+            <div class="box">
+            <label for="tone">Tone</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="tone">
+                <option selected value="">Choose here</option>
+                <option value="friendly">Friendly</option>
+                <option value="professional">Professional</option>
+                <option value="humorous">Humorous</option>
+                <option value="serious">Serious</option>
+                <option value="empathetic">Empathetic</option>
+            </select>
+            </div>
+
+            <div class="box">
+            <label for="format">Format</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="format">
+                <option selected value="">Choose here</option>
+                <option value="short answer">Short Answer</option>
+                <option value="paragraph">Paragraph</option>
+                <option value="bullet points">Bullet Points</option>
+                <option value="step-by-step guide">Step-by-Step Guide</option>
+                <option value="dialogue">Dialogue</option>
+            </select>
+            </div>
+
+            <div class="box">
+            <label for="audience">Audience</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="audience">
+                <option selected value="">Choose here</option>
+                <option value="expert">Expert</option>
+                <option value="beginner">Beginner</option>
+                <option value="peer">Peer</option>
+                <option value="general public">General Public</option>
+            </select>
+            </div>
+
+            <div class="box">
+            <label for="goal">Goal</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="goal">
+                <option selected value="">Choose here</option>
+                <option value="inform">Inform</option>
+                <option value="persuade">Persuade</option>
+                <option value="entertain">Entertain</option>
+                <option value="solve a problem">Solve a Problem</option>
+                <option value="brainstorm">Brainstorm</option>
+            </select>
+            </div>
+
+            <div class="box">
+            <label for="length">Length</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="length">
+                <option selected value="">Choose here</option>
+                <option value="concise">Concise</option>
+                <option value="detailed">Detailed</option>
+                <option value="one sentence">One Sentence</option>
+                <option value="multi-paragraph">Multi-Paragraph</option>
+            </select>
+            </div>
+
+            <div class="box">
+            <label for="text_style">Text style</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="text_style">
+                <option selected value="">Choose here</option>
+                <option value="formal">Formal</option>
+                <option value="informal">Informal</option>
+                <option value="conversational">Conversational</option>
+                <option value="technical">Technical</option>
+                <option value="creative">Creative</option>
+            </select>
+            </div>
+
+            <div class="box">
+            <label for="language">Language</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="language">
+                <option selected value="">Choose here</option>
+                <option value="british english">British English</option>
+                <option value="american english">American English</option>
+                <option value="spanish">Spanish</option>
+                <option value="french">French</option>
+            </select>
+            </div>
+
+            <div class="box">
+            <label for="medium">Medium</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="medium">
+                <option selected value="">Choose here</option>
+                <option value="email">Email</option>
+                <option value="text message">Text Message</option>
+                <option value="report">Report</option>
+                <option value="presentation">Presentation</option>
+                <option value="script">Script</option>
+            </select>
+            </div>
+
+            <div class="box">
+            <label for="specificity">Specificity</label>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="specificity">
+                <option selected value="">Choose here</option>
+                <option value="general overview">General Overview</option>
+                <option value="in-depth analysis">In-Depth Analysis</option>
+                <option value="specific example">Specific Example</option>
+            </select>
+            </div>
+        </div>
+
+        <div id="image-mode" style="display: none;">
+            <!-- Subject -->
+            <div class="box">
+                <label for="subject">Subject</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="subject">
+                    <option selected value="">Choose here</option>
+                    <option value="landscape">Landscape</option>
+                    <option value="portrait">Portrait</option>
+                    <option value="animal">Animal</option>
+                    <option value="architecture">Architecture</option>
+                    <option value="abstract">Abstract</option>
+                </select>
+            </div>
+            
+            <!-- Style -->
+            <div class="box">
+                <label for="image_style">Image style</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="image_style">
+                    <option selected value="">Choose here</option>
+                    <option value="realistic">Realistic</option>
+                    <option value="surreal">Surreal</option>
+                    <option value="cartoonish">Cartoonish</option>
+                    <option value="vintage">Vintage</option>
+                    <option value="futuristic">Futuristic</option>
+                </select>
+            </div>
+            
+            <!-- Composition -->
+            <div class="box">
+                <label for="composition">Composition</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="composition">
+                    <option selected value="">Choose here</option>
+                    <option value="front view">Front View</option>
+                    <option value="side view">Side View</option>
+                    <option value="close-up">Close-Up</option>
+                    <option value="wide shot">Wide Shot</option>
+                    <option value="panoramic">Panoramic</option>
+                </select>
+            </div>
+            
+            <!-- Colour Palette -->
+            <div class="box">
+                <label for="colour-palette">Colour Palette</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="colour-palette">
+                    <option selected value="">Choose here</option>
+                    <option value="vibrant">Vibrant</option>
+                    <option value="monochrome">Monochrome</option>
+                    <option value="pastel">Pastel</option>
+                    <option value="warm tones">Warm Tones</option>
+                    <option value="cool tones">Cool Tones</option>
+                </select>
+            </div>
+            
+            <!-- Textures -->
+            <div class="box">
+                <label for="textures">Textures</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="textures">
+                    <option selected value="">Choose here</option>
+                    <option value="smooth">Smooth</option>
+                    <option value="rough">Rough</option>
+                    <option value="glossy">Glossy</option>
+                    <option value="matte">Matte</option>
+                    <option value="textured paper">Textured Paper</option>
+                </select>
+            </div>
+            
+            <!-- Lighting -->
+            <div class="box">
+                <label for="lighting">Lighting</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="lighting">
+                    <option selected value="">Choose here</option>
+                    <option value="natural light">Natural Light</option>
+                    <option value="studio lighting">Studio Lighting</option>
+                    <option value="low-key">Low-Key</option>
+                    <option value="high-key">High-Key</option>
+                    <option value="dramatic">Dramatic</option>
+                </select>
+            </div>
+            
+            <!-- Mood -->
+            <div class="box">
+                <label for="mood">Mood</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="mood">
+                    <option selected value="">Choose here</option>
+                    <option value="serene">Serene</option>
+                    <option value="energetic">Energetic</option>
+                    <option value="mysterious">Mysterious</option>
+                    <option value="playful">Playful</option>
+                    <option value="melancholic">Melancholic</option>
+                </select>
+            </div>
+            
+            <!-- Quality -->
+            <div class="box">
+                <label for="quality">Quality</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="quality">
+                    <option selected value="">Choose here</option>
+                    <option value="high-detail">High-Detail</option>
+                    <option value="photorealistic">Photorealistic</option>
+                    <option value="sketchy">Sketchy</option>
+                    <option value="handmade">Handmade</option>
+                    <option value="masterpiece">Masterpiece</option>
+                </select>
+            </div>
+            
+            <!-- Background -->
+            <div class="box">
+                <label for="background">Background</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="background">
+                    <option selected value="">Choose here</option>
+                    <option value="plain">Plain</option>
+                    <option value="gradient">Gradient</option>
+                    <option value="detailed">Detailed</option>
+                    <option value="blurred">Blurred</option>
+                    <option value="bokeh">Bokeh</option>
+                </select>
+            </div>
+            
+            <!-- Environment -->
+            <div class="box">
+                <label for="environment">Environment</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="environment">
+                    <option selected value="">Choose here</option>
+                    <option value="indoor">Indoor</option>
+                    <option value="outdoor">Outdoor</option>
+                    <option value="urban">Urban</option>
+                    <option value="natural">Natural</option>
+                    <option value="space">Space</option>
+                </select>
+            </div>
+            
+            <!-- Weather -->
+            <div class="box">
+                <label for="weather">Weather</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="weather">
+                    <option selected value="">Choose here</option>
+                    <option value="sunny">Sunny</option>
+                    <option value="rainy">Rainy</option>
+                    <option value="snowy">Snowy</option>
+                    <option value="foggy">Foggy</option>
+                    <option value="stormy">Stormy</option>
+                </select>
+            </div>
+            
+            <!-- Time of Day -->
+            <div class="box">
+                <label for="time-of-day">Time of Day</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="time-of-day">
+                    <option selected value="">Choose here</option>
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="evening">Evening</option>
+                    <option value="night">Night</option>
+                </select>
+            </div>
+            
+            <!-- Camera Angle -->
+            <div class="box">
+                <label for="camera-angle">Camera Angle</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="camera-angle">
+                    <option selected value="">Choose here</option>
+                    <option value="aerial">Aerial</option>
+                    <option value="low-angle">Low-Angle</option>
+                    <option value="bird's-eye">Bird's-Eye</option>
+                    <option value="worm's-eye">Worm's-Eye</option>
+                </select>
+            </div>
+            
+            <!-- Art Movement -->
+            <div class="box">
+                <label for="art-movement">Art Movement</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="art-movement">
+                    <option selected value="">Choose here</option>
+                    <option value="impressionism">Impressionism</option>
+                    <option value="cubism">Cubism</option>
+                    <option value="surrealism">Surrealism</option>
+                    <option value="minimalism">Minimalism</option>
+                </select>
+            </div>
+            
+            <!-- Aspect Ratio -->
+            <div class="box">
+                <label for="aspect-ratio">Aspect Ratio</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="aspect-ratio">
+                    <option selected value="">Choose here</option>
+                    <option value="16:9">16:9</option>
+                    <option value="9:16">9:16</option>
+                    <option value="1:1">1:1</option>
+                    <option value="4:3">4:3</option>
+                    <option value="3:2">3:2</option>
+                </select>
+            </div>
+            
+            <!-- Parameters -->
+            <div class="box">
+                <label for="parameters">Parameters</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="parameters">
+                    <option selected value="">Choose here</option>
+                    <option value="--ar 9:16">--ar 9:16</option>
+                    <option value="--style raw">--style raw</option>
+                    <option value="--stylize 500">--stylize 500</option>
+                    <option value="--vibrance 70">--vibrance 70</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Preview Text Box -->
+        <div class="box card border-secondary mb-3">
+            <!-- <label for="preview">Preview:</label> -->
+             <div class="card-header">Preview
+                <button id="copyButton" type="button" class="btn btn-sm btn-outline-secondary copy-btn"
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-original-title="Copy to clipboard">
+                    <i class="bi bi-clipboard"></i> Copy
+                </button>
+             </div>
+             <!-- <div class=""></div> -->
+             <!-- style="max-width: 400px" -->
+             <!-- text-secondary -->
+            <div class="position-relative card-body">
+                <pre>
+                    <code  id="preview" rows="4">
+                    </code>
+                </pre>
+                <!-- <button id="copyButton" type="button" class="btn btn-sm btn-outline-secondary copy-btn"
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-original-title="Copy to clipboard">
+                    <i class="bi bi-clipboard"></i> Copy
+                </button> -->
+            <!-- <button id="copyButton" class="btn btn-sm btn-outline-secondary copy-btn">
+                <i class="bi bi-clipboard"></i>Copy</button> -->
+            
+            </div>
+        </div>
+
+        <div class="box">
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </symbol>
+                <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                </symbol>
+                <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </symbol>
+              </svg>
+          
+            <!-- Notification Container -->
+            <div id="notification-container" style="position: relative;">
+              <div id="notification" class="alert alert-success d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                  <use xlink:href="#check-circle-fill" />
+                </svg>
+                <div>Copied!</div>
+              </div>
+          
+              <div id="notification-nothing" class="alert alert-warning d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                  <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+                <div>Nothing to copy!</div>
+              </div>
+          
+              <div id="notification-error" class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                  <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+                <div>Failed to copy!</div>
+              </div>
+            </div>
+          </div>
+
+        <!-- <div class="box">
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </symbol>
+                <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                </symbol>
+                <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </symbol>
+              </svg>
+              
+            <div id="notification" class="hidden alert alert-success d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                    <use xlink:href="#check-circle-fill"/></svg>
+                <div>
+                    Copied!
+                </div>
+              </div>
+
+              <div id="notification-nothing" class="hidden alert alert-warning d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                    <use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                    Nothing to copy!
+                </div>
+              </div>
+              
+              <div id="notification-error" class="hidden alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                    <use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                    Failed to copy!
+                </div>
+              </div>
+        </div>
+    </div> -->
+
+    <script src="promptInjector.js"></script>
+</div>
+  
+</body>
+</html>

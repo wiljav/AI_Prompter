@@ -1,0 +1,339 @@
+/* Root Variables */
+:root {
+  --text-light: #000000;
+  --text-light-inner: #7e7e7e;
+  --bg-light: #f4f4f4;
+  --bg-light-box: #f4f4f4;
+  --bg-light-header-box: rgba(0, 0, 0, 0.15);
+  --bg-preview: #e6e6e6;
+  --bg-preview-dark: #2f2f2f87;
+  --border: rgb(0 0 0 / 17%) !important;
+  /* --bg-light-content-box: rgba(0,0,0,.03); */
+
+  --text-dark: #fff;
+  --bg-dark: #484848;
+  --bg-dark-header-box: rgba(0, 0, 0, 0.42);
+  /* --bg-light-header-box: rgba(0,0,0,.03); */
+  --border-dark: #aaaaaa54;
+
+  --bg-button: #3674B5;
+  --bg-button-highlight: #578FCA;
+}
+
+.form-switch {
+  float: right;
+}
+/* .btn-outline-primary {
+  color: #0d6efd;
+  border-color: #0d6efd;
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Container Styling */
+.container {
+  /* background-color: var(--bg-light); */
+  padding: 20px;
+  /* border-radius: 10px; */
+  /* box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1); */
+  /* width: 600px; */
+}
+
+.card-header {
+  background-color: var(--bg-light-header-box);
+  color: var(--text-light);
+}
+
+.card-header:not(:last-child) {
+  border-bottom: 0px;
+  background-color: rgba(0,0,0,.2) !important;
+}
+
+
+.card {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+}
+
+.card-body {
+  background-color: var(--bg-light-box);
+  color: var(--text-light);
+}
+
+.border-secondary:not(:last-child) {
+  border-color: rgba(0,0,0,.2) !important;
+}
+
+
+/* Radio Buttons */
+.radio-buttons {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  /* font-size: 14px; */
+  margin-bottom: 5px;
+  color: var(--text-light);
+  /* padding-bottom: 5px; */
+}
+
+.radio-buttons label {
+  /* margin-right: 15px; */
+  /* font-size: 16px; */
+  cursor: pointer;
+}
+
+.radio-buttons input[type="radio"] {
+  margin-right: 5px;
+}
+
+/* Input Fields */
+.box {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  background-color: var(--bg-light-box)!important;
+}
+/* select, textarea, #baseText {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: var(--bg-light);
+  resize: vertical;
+} */
+
+/* Preview Block */
+.box .position-relative {
+  position: relative;
+  width: 100%;
+}
+
+
+code {
+  display: block;
+  width: 100%;
+  min-height: 80px;
+  /* padding: 8px; */
+  font-family: inherit;
+  margin-top: -5%;
+}
+
+#copyButton #bot_open {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary-light-notif);
+  color: var(--text-light-notif);
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+
+}
+
+.btn-clipboard {
+  z-index: 10;
+  display: block;
+  padding: .25rem .5rem;
+  font-size: .65em;
+  color: #0d6efd;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  border: 1px solid;
+  border-radius: .25rem;
+}
+
+
+.hidden {
+  display: none;
+}
+
+/* Notification Styling */
+/* #notification {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: none;
+}
+
+#notification.visible {
+  opacity: 1;
+  display: block;
+}
+
+#notification-nothing {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: none;
+}
+
+#notification-nothing.visible {
+  opacity: 1;
+  display: block;
+}
+
+#notification-error {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: none;
+}
+
+#notification-error.visible {
+  opacity: 1;
+  display: block;
+} */
+#notification-container .alert {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  position: absolute; /* Ensure notifications overlap in the same position */
+  top: 0; /* Adjust as needed */
+  left: 0; /* Adjust as needed */
+  width: 100%; /* Ensure they take up the same space */
+}
+
+#notification-container .alert.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Copy Button */
+.copy-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: var(--text-light);
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
+}
+
+.copy-btn {
+  position: absolute;
+  right: 0.5rem;
+}
+
+.copy-btn {
+  position: absolute;
+  /* top: 0.5rem; */
+  right: 0.5rem;
+}
+
+pre {
+  margin-top: 0;
+  /* border: 1px solid #ddd; */
+  border-radius: 0.25rem;
+  font-size: 14px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  position: relative;
+}
+
+/* ------------------------------------------------------------ */
+
+body.dark-mode label {
+  display: block;
+  /* font-size: 14px; */
+  /* margin-bottom: 5px; */
+  color: var(--text-dark);
+}
+
+body.dark-mode {
+  background-color: var(--bg-dark);
+}
+
+body.dark-mode .form-control {
+  background-color: var(--bg-preview-dark)!important;
+}
+
+/* Dark Mode - Container */
+/* body.dark-mode .container { */
+  /* background-color: var(--bg-dark); */
+  /* box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); */
+/* } */
+
+body.dark-mode .card {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  /* border-color: var(--border-dark); */
+}
+
+body.dark-mode .card-header {
+  background-color: var(--bg-dark-header-box) ;
+  color: var(--text-dark);
+}
+
+body.dark-mode .card-header:not(:last-child) {
+  border-bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.42) !important;
+}
+
+body.dark-mode .card-body {
+  background-color: var(--bg-preview-dark);
+  color: var(--text-dark);
+}
+
+body.dark-mode .border-secondary:not(:last-child) {
+  border-color: var(--border);
+}
+
+/* Dark Theme Notifications */
+/* body.dark-mode #notification {
+  background-color: var(--primary-dark-notif);
+  color: var(--text-dark);
+} */
+
+/* body.dark-mode #notification-nothing {
+  background-color: var(--primary-dark-nothing-notif);
+  color: var(--text-dark);
+  display: block;
+}
+
+body.dark-mode #notification-error {
+  background-color: var(--primary-dark-error-notif);
+  color: var(--text-dark-error-notif);
+} */
+
+/* Dark Mode - Copy Button */
+body.dark-mode .copy-button {
+  background-color: var(--primary);
+  color: var(--text-dark);
+}
+
+body.dark-mode .copy-button:hover {
+  background-color: darken(var(--primary), 10%);
+}
+
+/* body.dark-mode pre {
+  border-color: #666;
+} */
+
+/* Dark Mode - Input Fields */
+body.dark-mode select,
+body.dark-mode textarea,
+body.dark-mode #baseText {
+  background-color: var(--bg-preview-dark);
+  color: var(--text-dark);
+  border-color: var(--border);
+}
