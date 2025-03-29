@@ -1,4 +1,7 @@
 # AI Prompter
+
+<img src="icon128.png" width="10%">
+
 A simple Google Chrome extension to generate optimised prompts that to efficiently use language models (LMs) for a wide variety of applications and research topics.
 
 ## Overview
