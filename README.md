@@ -3,6 +3,7 @@ A simple Google Chrome extension to generate optimised prompts that to efficient
 
 ## Overview
 The extension has two modes, Chat and Image:
+
 <img src="Screenshots/screenshot_3.png" width="50%">
 <!-- ![overview](Screenshots/screenshot_3.png) -->
 
